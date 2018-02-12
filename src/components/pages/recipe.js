@@ -22,7 +22,7 @@ class Recipes extends Component {
   render() {
     let { recipe } = this.state;
 
-    // console.log(recipe);
+    console.log(recipe);
     return (
       <div className="recipe-page main">
         {recipe &&
@@ -31,8 +31,11 @@ class Recipes extends Component {
             <div className="title">{recipe.title}</div>
             <div className="ingredients-list">
               <div className="title">INGREDIENTS</div>
-              {recipe.ingredients.map( ingredient =>
-                <div className={`ingredient ${ingredient.section && "section"}`}>
+              {recipe.ingredients.map( (ingredient, i) =>
+                <div
+                  key={i}
+                  className={`ingredient ${ingredient.section && "section"}`}
+                >
                   <span className="amount">
                     {ingredient.amount}
                   </span>{' '}
@@ -49,14 +52,17 @@ class Recipes extends Component {
             </div>
             <div className="instructions">
               <div className="title">DIRECTIONS</div>
-              {recipe.instructions.map( instruction =>
-                <div className="instruction">
+              {recipe.instructions.map( (instruction, i) =>
+                <div key={i} className="instruction">
                   {instruction}
                 </div>
               )}
             </div>
 
           </div>
+        }
+        {!recipe &&
+          <div className="loading-message"> loading yummy recipe... </div>
         }
       </div>
     );
